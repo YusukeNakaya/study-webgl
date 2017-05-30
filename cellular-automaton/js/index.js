@@ -235,9 +235,10 @@
       requestAnimationFrame(rendering, renderer.domElement);
     }
 
+    // ウィンドウサイズ
     function setWindowSize() {
-      windowWidth = $window.width();
-      windowHeight = $window.height();
+      windowWidth = $window.innerWidth();
+      windowHeight = $window.innerHeight();
     }
 
     return {
