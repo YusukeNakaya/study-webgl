@@ -11,11 +11,15 @@
       cellSize = 8,
       moveSurvive = 3,
       moveDeath = -1,
+      maxDepth = 300,
+      minDepth = 0,
       cols = 0,
       rows = 0,
       cells = [],
       cellRGB = 'rgb(255, 200, 20)',
       rendererRGB = 'rgb(255, 200, 20)',
+      // cellRGB = 'rgb(' + Math.floor(Math.random() * 255) + ', ' + Math.floor(Math.random() * 255) + ', ' + Math.floor(Math.random() * 255) + ')',
+      // rendererRGB = 'rgb(' + Math.floor(Math.random() * 255) + ', ' + Math.floor(Math.random() * 255) + ', ' + Math.floor(Math.random() * 255) + ')',
       startFlg = false,
       controls = null,
       scene = null,
@@ -184,6 +188,11 @@
 
     // フレーム毎のレンダリング
     function rendering() {
+      // カメラ自動回転
+      // camera.rotation.x += 0.001;
+      // camera.rotation.y += 0.002;
+      // camera.rotation.z += 0.001;
+
       // クリック（タッチスタート）待ち
       if (startFlg) {
         var tmpCells = [];
@@ -217,11 +226,11 @@
             if (tmpCells[col][row] == 1) {
               // 生きる場合の状態と位置変更
               cells[col][row].life = 1;
-              cells[col][row].z = Math.min(300, cells[col][row].z + moveSurvive);
+              cells[col][row].z = Math.min(maxDepth, cells[col][row].z + moveSurvive);
             } else {
               // 死ぬ場合の状態と位置変更
               cells[col][row].life = 0;
-              cells[col][row].z = Math.max(0, cells[col][row].z + moveDeath);
+              cells[col][row].z = Math.max(minDepth, cells[col][row].z + moveDeath);
             }
           }
         }
